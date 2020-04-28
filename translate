@@ -1,0 +1,18 @@
+#!/bin/bash
+
+URL=https://translate.alibaba.com/translationopenseviceapp/trans/TranslateTextAddAlignment.do
+
+if [ $# -lt 2 ]; then
+    echo "USAGE: $0 <TargetLanguage> <content...>"
+    echo "  中文 zh"
+    echo "  English en"
+    echo "  Français fr"
+    echo " e.g.: $0 en 你好"
+    exit 0
+fi
+
+targetLang=$1
+shift 1
+
+data="srcLanguage=auto&tgtLanguage=$targetLang&bizType=offer&srcText=$*"
+curl -s "$URL" -d "$data" | jq -r '.listTargetText|.[]'
