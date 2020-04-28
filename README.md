@@ -1,0 +1,2 @@
+# translater
+simple CLI translator
